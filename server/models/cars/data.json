@@ -1,0 +1,14 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "name": "Corolla",
+      "model_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Mobilio",
+      "model_id": 2
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+version: "3"
+services:
+    ui:
+        container_name: awesome_web
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        image: apui
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/usr/src/api
+    api:
+        container_name: awesome_server
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: apapi
+        ports:
+           - "7000:7000"
+        volumes:
+            - ./server:/usr/src/app
