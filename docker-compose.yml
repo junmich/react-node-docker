@@ -9,7 +9,7 @@ services:
         ports:
             - "3000:3000"
         volumes:
-            - ./client:/usr/src/api
+            - ./client:/usr/src/app
     api:
         container_name: awesome_server
         build:
@@ -19,4 +19,8 @@ services:
         ports:
            - "7000:7000"
         volumes:
-            - ./server:/usr/src/app
+            - ./server:/usr/src/api
+    db:
+        image: mongo
+        ports:
+           - "27017:27017"

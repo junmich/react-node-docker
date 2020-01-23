@@ -1,10 +1,11 @@
 FROM node:lts-slim
 
-RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/api
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/api
 COPY package.json .
 RUN npm install
+RUN npm install nodemon -g
 COPY . .
 
 

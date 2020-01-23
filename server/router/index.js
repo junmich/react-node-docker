@@ -3,6 +3,6 @@ const router = express.Router();
 
 const cars = require('../models/cars/all');
 
-router.use('/cars', cars);
+router.use('/', cars);
 
 module.exports = cars;
