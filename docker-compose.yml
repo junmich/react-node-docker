@@ -1,25 +1,27 @@
 version: "3"
 services:
     ui:
-        container_name: awesome_web
+        container_name: webapp
         build:
             context: ./client
             dockerfile: Dockerfile
-        image: apui
+        image: jun/jun:ui
         ports:
             - "3000:3000"
         volumes:
             - ./client:/usr/src/app
+            - /usr/src/app/node_modules
     api:
-        container_name: awesome_server
+        container_name: platform
         build:
             context: ./server
             dockerfile: Dockerfile
-        image: apapi
+        image: jun/jun:api
         ports:
            - "7000:7000"
         volumes:
             - ./server:/usr/src/api
+            - /usr/src/api/node_modules
     db:
         image: mongo
         ports:
