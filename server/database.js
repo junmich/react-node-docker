@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const DATABASE_CONNECTION = 'mongodb://db/test';
+const DATABASE_CONNECTION = 'mongodb:' +
+    '' +
+    '' +
+    '' +
+    '//db/test';
 
 mongoose.connect(DATABASE_CONNECTION, { useNewUrlParser: true });
 
