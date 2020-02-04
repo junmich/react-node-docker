@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cors());
-app.use(userRoute);
+app.use('/users', userRoute);
 
 console.log(faker.image.people);
 

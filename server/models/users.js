@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose');
+const validator = require('validator');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userSchema = mongoose.Schema({
     name: {
@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
         lowercase: true,
         validate: value => {
             if (!validator.isEmail(value)) {
-                throw new Error({error: 'Invalid Email address'})
+                throw new Error({error: 'Invalid Email address'});
             }
         }
     },
@@ -31,39 +31,39 @@ const userSchema = mongoose.Schema({
             required: true
         }
     }]
-})
+});
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async (next) => {
     // Hash the password before saving the user model
-    const user = this
+    const user = this;
     if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+        user.password = await bcrypt.hash(user.password, 8);
     }
-    next()
-})
+    next();
+});
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async () => {
     // Generate an auth token for the user
-    const user = this
-    const token = jwt.sign({_id: user._id}, 'junfile')
-    user.tokens = user.tokens.concat({token})
-    await user.save()
+    const user = this;
+    const token = jwt.sign({_id: user._id}, 'junfile');
+    user.tokens = user.tokens.concat({token});
+    await user.save();
     return token
-}
+};
 
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await User.findOne({ email} );
     if (!user) {
-        throw new Error({ error: 'Invalid login credentials' })
+        throw new Error({ error: 'Invalid login credentials' });
     }
-    const isPasswordMatch = await bcrypt.compare(password, user.password)
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-        throw new Error({ error: 'Invalid login credentials' })
+        throw new Error({ error: 'Invalid login credentials' });
     }
-    return user
-}
+    return user;
+};
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema);
 
-module.exports = User
+module.exports = User;
